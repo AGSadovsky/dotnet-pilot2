@@ -39,7 +39,7 @@ namespace DotnetPilot2 {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("dotnet_pilot2.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DotnetPilot2.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -142,7 +142,25 @@ namespace DotnetPilot2 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Player {0}, you lost!.
+        ///   Looks up a localized string similar to Player.
+        /// </summary>
+        public static string Player {
+            get {
+                return ResourceManager.GetString("Player", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player {0}, enter your name (blank to use default name): .
+        /// </summary>
+        public static string PlayerIntroduce {
+            get {
+                return ResourceManager.GetString("PlayerIntroduce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}, you lost!.
         /// </summary>
         public static string PlayerLost {
             get {
@@ -151,7 +169,7 @@ namespace DotnetPilot2 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Player {0}, your turn!.
+        ///   Looks up a localized string similar to {0}, your turn!.
         /// </summary>
         public static string PlayerTurn {
             get {

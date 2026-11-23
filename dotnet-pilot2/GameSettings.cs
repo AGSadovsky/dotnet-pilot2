@@ -1,52 +1,71 @@
 ﻿using DotnetPilot2;
 using System.Globalization;
 
-    public class GameSettings
+public class GameSettings
+{
+    public int PlayersNumber { get; } = 2;
+    public int TimerDurationMs { get; } = 5000;
+    public int MinWordLength { get; } = 8;
+    public int MaxWordLength { get; } = 30;
+    public Player[] players = [];
+
+    private static void ChangeLanguage(string cultureName)
     {
-        public int PlayersNumber { get; } = 2;
-        public int TimerDurationMs { get; } = 5000;
-        public int MinWordLength { get; } = 8;
-        public int MaxWordLength { get; } = 30;
+        var culture = new CultureInfo(cultureName);
 
-        private static void ChangeLanguage(string cultureName)
+        Thread.CurrentThread.CurrentCulture = culture;
+        Thread.CurrentThread.CurrentUICulture = culture;
+
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+    }
+
+    public GameSettings()
+    {
+        bool isLanguageSelected = false;
+        while (!isLanguageSelected)
         {
-            var culture = new CultureInfo(cultureName);
+            Console.WriteLine(Messages.ChooseLang);
+            Console.Write("> ");
+            string? choice = Console.ReadLine();
 
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
-
-            CultureInfo.DefaultThreadCurrentCulture = culture;
-            CultureInfo.DefaultThreadCurrentUICulture = culture;
-        }
-
-        public GameSettings()
-        {
-            bool isLanguageSelected = false;
-            while (!isLanguageSelected)
+            switch (choice)
             {
-                Console.WriteLine(Messages.ChooseLang);
-                Console.Write("> ");
-                string? choice = Console.ReadLine();
-
-                switch (choice)
-                {
-                    case "1":
-                        ChangeLanguage("en-US");
-                        isLanguageSelected = true;
-                        break;
-                    case "2":
-                        ChangeLanguage("ru-RU");
-                        isLanguageSelected = true;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid input\n");
-                        continue;
-                }
-
-                Console.WriteLine("-----------------------------------------");
-                Console.WriteLine(Messages.Greeting);
-                Console.WriteLine(string.Format(Messages.GameRules, TimerDurationMs / 1000));
-                Console.WriteLine("-----------------------------------------\n");
+                case "1":
+                    ChangeLanguage("en-US");
+                    isLanguageSelected = true;
+                    break;
+                case "2":
+                    ChangeLanguage("ru-RU");
+                    isLanguageSelected = true;
+                    break;
+                default:
+                    Console.WriteLine("Invalid input\n");
+                    continue;
             }
+
+            InitializePlayers();
+
+            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine(Messages.Greeting);
+            Console.WriteLine(string.Format(Messages.GameRules, TimerDurationMs / 1000));
+            Console.WriteLine("-----------------------------------------\n");
         }
     }
+
+    private void InitializePlayers()
+    {
+        players = new Player[PlayersNumber];
+
+        for (int playerNumber = 0; playerNumber < PlayersNumber; playerNumber++)
+        {
+            Console.Write(string.Format(Messages.PlayerIntroduce, (playerNumber + 1)));
+            string? player = Console.ReadLine();
+            if (string.IsNullOrEmpty(player))
+                player = Messages.Player + " " + (playerNumber + 1);
+
+            players[playerNumber] = new Player(player);
+        }
+    }
+
+}

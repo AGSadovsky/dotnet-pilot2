@@ -26,22 +26,24 @@ internal class Program
         {
             var dictionary = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { validBaseWord };
             var baseWordLetters = baseWord.SplitIntoLetters();
+            var currentGame = new GameResult();
+            //var gamesArchive = currentGame.LoadStatistics();
 
-            int currentPlayer = 0;
+            int currentPlayer = -1;
             bool canContinueGame = true;
  
             //play until a user enters an incorrect word or the timer is up
             while (canContinueGame)
             {
                 currentPlayer = util.GetNextPlayer(currentPlayer);
-                Console.WriteLine(string.Format(Messages.PlayerTurn, currentPlayer));
+                Console.WriteLine(string.Format(Messages.PlayerTurn, gameSettings.players[currentPlayer].GetName()));
 
                 var consoleReader = new ConsoleReaderOnTimer(gameSettings.TimerDurationMs);
                 var userWord = new UserWord(consoleReader.ReadLine() ?? string.Empty);
 
-                if (userWord.IsNotEmpty())
+                if (userWord.IsNotEmpty())//empty line produces TimeIsUp error - ToDo: fix
                 {
-                    canContinueGame = userWord.ValidateInput(dictionary, baseWordLetters, out string errorMessage);
+                    canContinueGame = userWord.IsValidInput(dictionary, baseWordLetters, out string errorMessage);
                     Console.Write(errorMessage);
                 }
                 else
@@ -51,7 +53,8 @@ internal class Program
                 }
             }
 
-            Console.Write($"\n{string.Format(Messages.PlayerLost, currentPlayer)}");
+            currentGame.SaveStatistics(new GameResult(gameSettings.players, dictionary, gameSettings.players[util.GetWinner(currentPlayer)].GetName()));
+            Console.Write($"\n{string.Format(Messages.PlayerLost, gameSettings.players[currentPlayer].GetName())}");
         }
     }
 }

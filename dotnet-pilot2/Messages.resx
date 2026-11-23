@@ -142,15 +142,21 @@
     <value>The minimum word length should be more than 1 symbol</value>
   </data>
   <data name="PlayerLost" xml:space="preserve">
-    <value>Player {0}, you lost!</value>
+    <value>{0}, you lost!</value>
   </data>
   <data name="PlayerTurn" xml:space="preserve">
-    <value>Player {0}, your turn!</value>
+    <value>{0}, your turn!</value>
   </data>
   <data name="TimeIsUp" xml:space="preserve">
     <value>Time is up!</value>
   </data>
   <data name="DuplicateUserWord" xml:space="preserve">
     <value>The word is not unique!</value>
+  </data>
+  <data name="PlayerIntroduce" xml:space="preserve">
+    <value>Player {0}, enter your name (blank to use default name): </value>
+  </data>
+  <data name="Player" xml:space="preserve">
+    <value>Player</value>
   </data>
 </root>

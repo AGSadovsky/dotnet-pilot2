@@ -142,15 +142,21 @@
     <value>Минимальная длина слова должна составлять более 1 символа</value>
   </data>
   <data name="PlayerLost" xml:space="preserve">
-    <value>Игрок {0}, вы проиграли!</value>
+    <value>{0}, вы проиграли!</value>
   </data>
   <data name="PlayerTurn" xml:space="preserve">
-    <value>Игрок {0}, ваш ход!</value>
+    <value>{0}, ваш ход!</value>
   </data>
   <data name="TimeIsUp" xml:space="preserve">
     <value>Время истекло!</value>
   </data>
   <data name="DuplicateUserWord" xml:space="preserve">
     <value>Такое слово уже использовалось!</value>
+  </data>
+  <data name="PlayerIntroduce" xml:space="preserve">
+    <value>Игрок {0}, представьтесь (пустое значение для использования имени по умолчанию): </value>
+  </data>
+  <data name="Player" xml:space="preserve">
+    <value>Игрок</value>
   </data>
 </root>

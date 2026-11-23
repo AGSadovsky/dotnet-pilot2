@@ -52,7 +52,7 @@ public class UserWord
         return true;
     }
 
-    public bool ValidateInput(HashSet<string> uniqueWords, List<char> baseWordLetters, out string errorMessage)
+    public bool IsValidInput(HashSet<string> uniqueWords, List<char> baseWordLetters, out string errorMessage)
     {
         if (!IsValidLength())
         {

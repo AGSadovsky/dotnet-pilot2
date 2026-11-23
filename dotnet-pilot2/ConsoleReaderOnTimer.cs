@@ -3,7 +3,7 @@
 public class ConsoleReaderOnTimer
 {
 	private int _timeoutMs;
-	public ConsoleReaderOnTimer(int timeoutMs)
+    public ConsoleReaderOnTimer(int timeoutMs)
 	{
 		_timeoutMs = timeoutMs;
 	}
