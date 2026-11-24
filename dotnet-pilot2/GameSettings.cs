@@ -7,7 +7,7 @@ public class GameSettings
     public int TimerDurationMs { get; } = 5000;
     public int MinWordLength { get; } = 8;
     public int MaxWordLength { get; } = 30;
-    public Player[] players = [];
+    public List<Player> players = [];
 
     private static void ChangeLanguage(string cultureName)
     {
@@ -55,16 +55,15 @@ public class GameSettings
 
     private void InitializePlayers()
     {
-        players = new Player[PlayersNumber];
-
         for (int playerNumber = 0; playerNumber < PlayersNumber; playerNumber++)
         {
             Console.Write(string.Format(Messages.PlayerIntroduce, (playerNumber + 1)));
-            string? player = Console.ReadLine();
-            if (string.IsNullOrEmpty(player))
-                player = Messages.Player + " " + (playerNumber + 1);
+            string? playerName = Console.ReadLine();
 
-            players[playerNumber] = new Player(player);
+            if (string.IsNullOrEmpty(playerName))
+                playerName = Messages.Player + " " + (playerNumber + 1);
+
+            players.Add(new Player(playerName));
         }
     }
 

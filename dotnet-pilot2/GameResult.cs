@@ -29,7 +29,7 @@ namespace DotnetPilot2
         {
         }
         
-        public GameResult(Player[] players, HashSet<string> dictionary, string winner)
+        public GameResult(List<Player> players, HashSet<string> dictionary, string winner)
         {
             gameId = DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fffffff");
             player1 = players[0].GetName();

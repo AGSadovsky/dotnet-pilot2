@@ -9,6 +9,7 @@ internal class Program
         Console.InputEncoding = Encoding.UTF8;
 
         var gameSettings = new GameSettings();
+        var players = gameSettings.players;
         var util = new Util(gameSettings);
 
         Console.WriteLine(string.Format(Messages.BaseWordEnter, gameSettings.MinWordLength, gameSettings.MaxWordLength));
@@ -26,17 +27,17 @@ internal class Program
         {
             var dictionary = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { validBaseWord };
             var baseWordLetters = baseWord.SplitIntoLetters();
-            var currentGame = new GameResult();
-            //var gamesArchive = currentGame.LoadStatistics();
+            var currentGameResult = new GameResult();
+            //var archivedGameResults = currentGame.LoadStatistics();
 
-            int currentPlayer = -1;
+            int currentPlayerId = -1;
             bool canContinueGame = true;
  
             //play until a user enters an incorrect word or the timer is up
             while (canContinueGame)
             {
-                currentPlayer = util.GetNextPlayer(currentPlayer);
-                Console.WriteLine(string.Format(Messages.PlayerTurn, gameSettings.players[currentPlayer].GetName()));
+                currentPlayerId = util.GetNextPlayer(currentPlayerId);
+                Console.WriteLine(string.Format(Messages.PlayerTurn, players[currentPlayerId].GetName()));
 
                 var consoleReader = new ConsoleReaderOnTimer(gameSettings.TimerDurationMs);
                 var userWord = new UserWord(consoleReader.ReadLine() ?? string.Empty);
@@ -53,8 +54,8 @@ internal class Program
                 }
             }
 
-            currentGame.SaveStatistics(new GameResult(gameSettings.players, dictionary, gameSettings.players[util.GetWinner(currentPlayer)].GetName()));
-            Console.Write($"\n{string.Format(Messages.PlayerLost, gameSettings.players[currentPlayer].GetName())}");
+            currentGameResult.SaveStatistics(new GameResult(players, dictionary, players[util.GetWinner(currentPlayerId)].GetName()));
+            Console.Write($"\n{string.Format(Messages.PlayerLost, players[currentPlayerId].GetName())}");
         }
     }
 }
