@@ -57,7 +57,7 @@ public class GameSettings
     {
         for (int playerNumber = 0; playerNumber < PlayersNumber; playerNumber++)
         {
-            Console.Write(string.Format(Messages.PlayerIntroduce, (playerNumber + 1)));
+            Console.Write(string.Format(Messages.PlayerIntroduce, playerNumber + 1));
             string? playerName = Console.ReadLine();
 
             if (string.IsNullOrEmpty(playerName))

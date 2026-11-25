@@ -14,12 +14,17 @@ public class UserWord
         return _userWord;
     }
 
+    public bool IsCommand()
+    {
+        return _userWord.StartsWith("/");
+    }
+
     public bool IsNotEmpty()
     {
         return _userWord != string.Empty;
     }
 
-    private bool IsValidLength()
+    private bool HasValidLength()
     {
         return _userWord.Length > 1;
     }
@@ -35,10 +40,8 @@ public class UserWord
 
         foreach (char letter in baseWordLetters)
         {
-            if (letterCounts.ContainsKey(letter))
+            if (!letterCounts.TryAdd(letter, 1))
                 letterCounts[letter]++;
-            else
-                letterCounts[letter] = 1;
         }
 
         foreach (char letter in _userWord.ToLower())
@@ -52,9 +55,9 @@ public class UserWord
         return true;
     }
 
-    public bool IsValidInput(HashSet<string> uniqueWords, List<char> baseWordLetters, out string errorMessage)
+    public bool IsValid(HashSet<string> uniqueWords, List<char> baseWordLetters, out string errorMessage)
     {
-        if (!IsValidLength())
+        if (!HasValidLength())
         {
             errorMessage = Messages.InvalidWordLength;
             return false;

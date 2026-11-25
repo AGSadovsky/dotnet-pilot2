@@ -88,6 +88,24 @@ namespace DotnetPilot2 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current game words.
+        /// </summary>
+        public static string CurrentGameWords {
+            get {
+                return ResourceManager.GetString("CurrentGameWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current players statistics.
+        /// </summary>
+        public static string CurrentPlayersStatistics {
+            get {
+                return ResourceManager.GetString("CurrentPlayersStatistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The word is not unique!.
         /// </summary>
         public static string DuplicateUserWord {
@@ -142,6 +160,15 @@ namespace DotnetPilot2 {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Leaderboard.
+        /// </summary>
+        public static string Leaderboard {
+            get {
+                return ResourceManager.GetString("Leaderboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Player.
         /// </summary>
         public static string Player {
@@ -183,6 +210,24 @@ namespace DotnetPilot2 {
         public static string TimeIsUp {
             get {
                 return ResourceManager.GetString("TimeIsUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} total score: {1}.
+        /// </summary>
+        public static string TotalScore {
+            get {
+                return ResourceManager.GetString("TotalScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User command {0} not implemented.
+        /// </summary>
+        public static string UserCommandNotImplemented {
+            get {
+                return ResourceManager.GetString("UserCommandNotImplemented", resourceCulture);
             }
         }
     }

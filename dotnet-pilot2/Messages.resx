@@ -159,4 +159,19 @@
   <data name="Player" xml:space="preserve">
     <value>Player</value>
   </data>
+  <data name="Leaderboard" xml:space="preserve">
+    <value>Leaderboard</value>
+  </data>
+  <data name="CurrentGameWords" xml:space="preserve">
+    <value>Current game words</value>
+  </data>
+  <data name="CurrentPlayersStatistics" xml:space="preserve">
+    <value>Current players statistics</value>
+  </data>
+  <data name="TotalScore" xml:space="preserve">
+    <value>{0} total score: {1}</value>
+  </data>
+  <data name="UserCommandNotImplemented" xml:space="preserve">
+    <value>User command {0} not implemented</value>
+  </data>
 </root>

@@ -28,7 +28,7 @@ internal class Program
             var dictionary = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { validBaseWord };
             var baseWordLetters = baseWord.SplitIntoLetters();
             var currentGameResult = new GameResult();
-            //var archivedGameResults = currentGame.LoadStatistics();
+            var archivedGameResults = currentGameResult.LoadStatistics();
 
             int currentPlayerId = -1;
             bool canContinueGame = true;
@@ -40,11 +40,16 @@ internal class Program
                 Console.WriteLine(string.Format(Messages.PlayerTurn, players[currentPlayerId].GetName()));
 
                 var consoleReader = new ConsoleReaderOnTimer(gameSettings.TimerDurationMs);
-                var userWord = new UserWord(consoleReader.ReadLine() ?? string.Empty);
+                var userInput = new UserWord(consoleReader.ReadLine() ?? string.Empty);
 
-                if (userWord.IsNotEmpty())//empty line produces TimeIsUp error - ToDo: fix
+                if (userInput.IsCommand())
                 {
-                    canContinueGame = userWord.IsValidInput(dictionary, baseWordLetters, out string errorMessage);
+                    util.ProcessUserCommand(userInput.Get(), dictionary, archivedGameResults, players);
+                    currentPlayerId = util.GetNextPlayer(currentPlayerId);
+                }
+                else if (userInput.IsNotEmpty())//empty line produces TimeIsUp error - ToDo: fix
+                {
+                    canContinueGame = userInput.IsValid(dictionary, baseWordLetters, out string errorMessage);
                     Console.Write(errorMessage);
                 }
                 else
