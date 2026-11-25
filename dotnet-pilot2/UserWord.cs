@@ -1,81 +1,82 @@
-﻿using DotnetPilot2;
-
-public class UserWord
+﻿namespace DotnetPilot2
 {
-    private string _userWord;
-
-	public UserWord(string userWord)
-	{
-        _userWord = userWord;
-	}
-
-    public string Get()
+    public class UserWord
     {
-        return _userWord;
-    }
+        private string _userWord;
 
-    public bool IsCommand()
-    {
-        return _userWord.StartsWith("/");
-    }
-
-    public bool IsNotEmpty()
-    {
-        return _userWord != string.Empty;
-    }
-
-    private bool HasValidLength()
-    {
-        return _userWord.Length > 1;
-    }
-
-    private bool IsUnique(HashSet<string> uniqueWords)
-    {
-        return uniqueWords.Add(_userWord);
-    }
-
-    private bool CanBuildNewWord(List<char> baseWordLetters)
-    {
-        var letterCounts = new Dictionary<char, int>(30);
-
-        foreach (char letter in baseWordLetters)
+        public UserWord(string userWord)
         {
-            if (!letterCounts.TryAdd(letter, 1))
-                letterCounts[letter]++;
+            _userWord = userWord;
         }
 
-        foreach (char letter in _userWord.ToLower())
+        public string Get()
         {
-            if (!letterCounts.ContainsKey(letter) || letterCounts[letter] == 0)
+            return _userWord;
+        }
+
+        public bool IsCommand()
+        {
+            return _userWord.StartsWith("/");
+        }
+
+        public bool IsNotEmpty()
+        {
+            return _userWord != string.Empty;
+        }
+
+        private bool HasValidLength()
+        {
+            return _userWord.Length > 1;
+        }
+
+        private bool IsUnique(HashSet<string> uniqueWords)
+        {
+            return uniqueWords.Add(_userWord);
+        }
+
+        private bool CanBuildNewWord(List<char> baseWordLetters)
+        {
+            var letterCounts = new Dictionary<char, int>(30);
+
+            foreach (char letter in baseWordLetters)
+            {
+                if (!letterCounts.TryAdd(letter, 1))
+                    letterCounts[letter]++;
+            }
+
+            foreach (char letter in _userWord.ToLower())
+            {
+                if (!letterCounts.ContainsKey(letter) || letterCounts[letter] == 0)
+                    return false;
+
+                letterCounts[letter]--;
+            }
+
+            return true;
+        }
+
+        public bool IsValid(HashSet<string> uniqueWords, List<char> baseWordLetters, out string errorMessage)
+        {
+            if (!HasValidLength())
+            {
+                errorMessage = Messages.InvalidWordLength;
                 return false;
+            }
 
-            letterCounts[letter]--;
+            if (!IsUnique(uniqueWords))
+            {
+                errorMessage = Messages.DuplicateUserWord;
+                return false;
+            }
+
+            if (!CanBuildNewWord(baseWordLetters))
+            {
+                errorMessage = Messages.IncorrectWord;
+                return false;
+            }
+
+            errorMessage = string.Empty;
+            return true;
         }
-
-        return true;
-    }
-
-    public bool IsValid(HashSet<string> uniqueWords, List<char> baseWordLetters, out string errorMessage)
-    {
-        if (!HasValidLength())
-        {
-            errorMessage = Messages.InvalidWordLength;
-            return false;
-        }
-
-        if (!IsUnique(uniqueWords))
-        {
-            errorMessage = Messages.DuplicateUserWord;
-            return false;
-        }
-
-        if (!CanBuildNewWord(baseWordLetters))
-        {
-            errorMessage = Messages.IncorrectWord;
-            return false;
-        }
-
-        errorMessage = string.Empty;
-        return true;
     }
 }

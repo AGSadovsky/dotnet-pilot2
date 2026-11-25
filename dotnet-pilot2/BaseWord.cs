@@ -1,29 +1,32 @@
-﻿public class BaseWord
+﻿namespace DotnetPilot2
 {
-	private string _baseWord;
-	private GameSettings _gameSettings;
-
-	public BaseWord(string baseWord, GameSettings settings)
-	{
-		_baseWord = baseWord;
-		_gameSettings = settings;
-	}
-
-	public string Get()
-	{
-		return _baseWord;
-	}
-
-    public bool IsValid()
+    public class BaseWord
     {
-        return _baseWord.Length >= _gameSettings.MinWordLength
-            && _baseWord.Length <= _gameSettings.MaxWordLength
-            && _baseWord.All(char.IsLetter);
-    }
+        private string _baseWord;
+        private GameSettings _gameSettings;
 
-    public List<char> SplitIntoLetters()
-    {
-        return _baseWord.ToLower().ToList();
-    }
+        public BaseWord(string baseWord, GameSettings settings)
+        {
+            _baseWord = baseWord;
+            _gameSettings = settings;
+        }
 
+        public string Get()
+        {
+            return _baseWord;
+        }
+
+        public bool IsValid()
+        {
+            return _baseWord.Length >= _gameSettings.MinWordLength
+                && _baseWord.Length <= _gameSettings.MaxWordLength
+                && _baseWord.All(char.IsLetter);
+        }
+
+        public List<char> SplitIntoLetters()
+        {
+            return _baseWord.ToLower().ToList();
+        }
+
+    }
 }
