@@ -36,7 +36,7 @@
 
         private bool CanBuildNewWord(List<char> baseWordLetters)
         {
-            var letterCounts = new Dictionary<char, int>(30);
+            var letterCounts = new Dictionary<char, int>(baseWordLetters.Count);
 
             foreach (char letter in baseWordLetters)
             {

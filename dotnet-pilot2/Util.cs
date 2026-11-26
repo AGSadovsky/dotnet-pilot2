@@ -62,9 +62,9 @@
 
             foreach (var result in archivedGameResults)
             {
-                if ((result.winner == player1Name) || (result.winner == player2Name))
+                if ((result.Winner == player1Name) || (result.Winner == player2Name))
                 {
-                    winners[result.winner]++;
+                    winners[result.Winner]++;
                 }
             }
 
@@ -81,8 +81,8 @@
             Dictionary<string, int> winners = new(archivedGameResults.Count);
             foreach (var result in archivedGameResults)
             {
-                if (!winners.TryAdd(result.winner, 1))
-                    winners[result.winner]++;
+                if (!winners.TryAdd(result.Winner, 1))
+                    winners[result.Winner]++;
             }
 
             Console.WriteLine(Messages.Leaderboard);

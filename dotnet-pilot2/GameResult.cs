@@ -8,15 +8,15 @@ namespace DotnetPilot2
     public class GameResult
     {
         [JsonPropertyName("gameId")]
-        public string gameId { get; set; } = string.Empty;
+        public string GameId { get; set; } = string.Empty;
         [JsonPropertyName("player1")]
-        public string player1 { get; set; } = string.Empty;
+        public string Player1 { get; set; } = string.Empty;
         [JsonPropertyName("player2")]
-        public string player2 { get; set; } = string.Empty;
+        public string Player2 { get; set; } = string.Empty;
         [JsonPropertyName("dictionary")]
-        public HashSet<string> dictionary { get; set; } = new();
+        public HashSet<string> Dictionary { get; set; } = new();
         [JsonPropertyName("winner")]
-        public string winner { get; set; } = string.Empty;
+        public string Winner { get; set; } = string.Empty;
         
         private string _filePath = "wordGameStats.json";
         private readonly JsonSerializerOptions _options = new()
@@ -31,11 +31,11 @@ namespace DotnetPilot2
         
         public GameResult(List<Player> players, HashSet<string> dictionary, string winner)
         {
-            gameId = DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fffffff");
-            player1 = players[0].GetName();
-            player2 = players[1].GetName();
-            this.dictionary = dictionary;
-            this.winner = winner;
+            GameId = DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fffffff");
+            Player1 = players[0].GetName();
+            Player2 = players[1].GetName();
+            this.Dictionary = dictionary;
+            this.Winner = winner;
         }
 
         public List<GameResult> LoadStatistics()
